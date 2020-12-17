@@ -4,7 +4,7 @@ The SW is based on the ESP8266 Non-OS SDK and uses the IoT-Demo as a basis.
 
 Features:
 - Measures up to 12 current and voltage values (3 per INA3221, common ground)
-- Estimates state-of-charge and state-of-health of a battery based on coulomb counting and an voltage (OCV) to state-of-charge curve.
+- Estimates state-of-charge and state-of-health of a battery based on coulomb counting and a voltage (OCV) to state-of-charge curve.
 - Provide the values via a REST interface as JSON data (the interface is based on the ESP IoT-Demo included in the Non-OS-SDK)
 
 # Current State

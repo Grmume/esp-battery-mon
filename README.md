@@ -19,3 +19,7 @@ To Do:
     - End-Of-Charge detection
     - Correction of coulomb counter when voltage is relaxed (OCV)
     - Calculate State-Of-Health from relaxed voltages
+- REST API
+    - Use the IoT Demo as a basis and add the required fields to the JSON data
+
+- Remove superfluous code from the IoT Demo

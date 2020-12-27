@@ -1,10 +1,10 @@
-#include "user_fuelgauge_cfg.h"
+#include "fgauge_cfg.h"
 
-const fuelgg_cfg_type fuelgg_cfg = 
+const fgauge_cfg_type fgauge_cfg = 
 {
     .bat = 
     {
-        .battery_type = FUELGG_LEADACID,
+        .battery_type = FGAUGE_LEADACID,
         .nominal_capacity_Ah = 60
     },
     .ocv_delta_thd_mV = 50,

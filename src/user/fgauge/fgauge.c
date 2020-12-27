@@ -1,10 +1,10 @@
-#include "user_fuelgauge.h"
-#include "user_powermeter.h"
+#include "fgauge.h"
+#include "powermtr.h"
 #include "ets_sys.h"
 typedef struct
 {
-    uint16 voltage_mV[FUELGG_CFG_HISTORY_SIZE];
-    sint32 current_mA[FUELGG_CFG_HISTORY_SIZE];
+    uint16 voltage_mV[FGAUGE_CFG_HISTORY_SIZE];
+    sint32 current_mA[FGAUGE_CFG_HISTORY_SIZE];
     uint16 current_idx;
     uint16 value_count;
 }history_type;
@@ -17,7 +17,7 @@ typedef struct
     uint8 soh;                    /* 0..255 */
 }livedata_type;
 
-LOCAL fuelgg_cfg_type* current_cfg;
+LOCAL fgauge_cfg_type* current_cfg;
 
 LOCAL livedata_type livedata;
 LOCAL uint16 relaxing_cntr;
@@ -26,14 +26,14 @@ LOCAL void add_to_history(uint16 voltage_mV, sint32 current_mA);
 LOCAL bool get_from_history(uint16 index, uint16* voltage_mV, sint32* current_mA);
 LOCAL void detect_endofcharge(void);
 
-bool user_fuelgg_init(fuelgg_cfg_type* cfg)
+bool fgauge_init(fuelgg_cfg_type* cfg)
 {
     current_cfg = cfg;
 
     /* TODO Clear history. */
 }
 
-void user_fuelgg_main(void)
+void fgauge_main(void)
 {
     powermtr_chndata_type* data = user_powermtr_read_batterydata();
     uint16 last_u;
@@ -117,7 +117,7 @@ LOCAL void detect_endofcharge()
         fuelgg_current_channel_type* chn = &(current_cfg->current_channels[idx]);
         if(chn->type == FUELGG_CHARGING || chn->type == FUELGG_BIDIRECTIONAL)
         {
-            powermtr_chndata_type* data = user_powermtr_read_channel(chn->powermtr_channel);
+            powermtr_chndata_type* data = powermtr_read_channel(chn->powermtr_channel);
             /* Check if the measured voltage is higher than the end of charge detection threshold. */
             if(data->voltage_mV > chn->endofcharge_cfg.voltage_thd_mV)
             {

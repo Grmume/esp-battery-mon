@@ -1,16 +1,16 @@
-#include "user_powermeter.h"
+#include "powermtr.h"
 #include "ina3221.h"
 #include "ets_sys.h"
 
 LOCAL powermtr_cfg_type* current_cfg; 
 LOCAL powermtr_chndata_type chn_data[POWERMTR_CFG_CHANNEL_COUNT];
 
-bool user_powermtr_init(powermtr_cfg_type* cfg)
+bool powermtr_init(powermtr_cfg_type* cfg)
 {
     current_cfg = cfg;
 }
 
-void user_powermtr_main(void)
+void powermtr_main(void)
 {
     /* ---- Determine battery voltage and current ---- */
     uint32 vbat_adc_sum = 0;
@@ -47,7 +47,7 @@ void user_powermtr_main(void)
     }
 }
 
-powermtr_chndata_type* user_powermtr_read_channel(powermtr_channelref_type chn)
+powermtr_chndata_type* powermtr_read_channel(powermtr_channelref_type chn)
 {
     return &(chn_data[chn]);
 }

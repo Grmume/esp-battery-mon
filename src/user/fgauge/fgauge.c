@@ -35,7 +35,7 @@ bool fgauge_init(fgauge_cfg_type* cfg)
 
 void fgauge_main(void)
 {
-    powermtr_chndata_type* data = user_powermtr_read_batterydata();
+    powermtr_chndata_type* data /*= powermtr_read_batterydata() TODO */;
     uint16 last_u;
     sint32 last_i;
     if(get_from_history(0, &last_u, &last_i))

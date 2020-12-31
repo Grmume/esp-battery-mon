@@ -1,5 +1,5 @@
-#ifndef __USER_POWERMETER_CFG_H__
-#define __USER_POWERMETER_CFG_H__
+#ifndef __POWERMTR_CFG_H__
+#define __POWERMTR_CFG_H__
 #include "c_types.h"
 #include "ina3221_cfg.h"
 

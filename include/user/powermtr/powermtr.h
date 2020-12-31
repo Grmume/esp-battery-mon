@@ -1,6 +1,6 @@
 #ifndef __POWERMTR_H__
 #define __POWERMTR_H__
-#include "user_powermeter_cfg.h"
+#include "powermtr_cfg.h"
 
 typedef struct
 {

@@ -53,8 +53,8 @@ void user_mvh3004_init(void);
 
 #if BATTERYMON_SUB_DEVICE
 #include "ina3221.h"
-#include "user_powermeter.h"
-#include "user_fuelgauge.h"
+#include "powermtr.h"
+#include "fgauge.h"
 #endif
 
 void user_sensor_init(uint8 active);

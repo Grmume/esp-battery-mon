@@ -22,19 +22,27 @@ typedef struct
     uint16 current_thd_mA;
 }fgauge_endofcharge_cfg_type;
 
+typedef enum
+{
+    FGAUGE_CHARGE,
+    FGAUGE_DISCHARGE,
+    FGAUGE_BIDIRECTIONAL
+}fgauge_channel_type;
+
+
 typedef struct
 {
     powermtr_channelref_type powermtr_channel;
+    fgauge_channel_type type;
     fgauge_endofcharge_cfg_type endofcharge_cfg;
-}fgauge_charger_channel_type;
+}fgauge_current_channel_type;
 
 
 /* Precompile configuration. */
 #define FGAUGE_CFG_HISTORY_SIZE  2
 #define FGAUGE_CFG_CALLCYCLE_MS  100
 
-#define FGAUGE_CFG_CHG_CHANNEL_COUNT     2
-#define FGAUGE_CFG_DISCHG_CHANNEL_COUNT  1
+#define FGAUGE_CFG_CURRENT_CHANNEL_COUNT     3
 typedef struct
 {
     fgauge_battery_cfg_type bat;
@@ -42,8 +50,7 @@ typedef struct
     uint16 ocv_detect_holdoff_ms;
     uint8 ocv_delta_thd_mV;
     uint8 ocv_current_thd_mA;
-    fgauge_charger_channel_type chg_channels[FGAUGE_CFG_CHG_CHANNEL_COUNT];
-    powermtr_channelref_type dischg_channels[FGAUGE_CFG_DISCHG_CHANNEL_COUNT];
+    fgauge_current_channel_type current_channels[FGAUGE_CFG_CURRENT_CHANNEL_COUNT];
 }fgauge_cfg_type;
 
 

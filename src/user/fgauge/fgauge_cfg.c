@@ -15,7 +15,7 @@ const fgauge_cfg_type fgauge_cfg =
     {
         {
             .powermtr_channel = POWERMTR_CFG_CHN_SOLARALTERNATOR,
-            .type = FUELGG_CHARGING,
+            .type = FGAUGE_CHARGE,
             .endofcharge_cfg = 
             {
                 .voltage_thd_mV = 13500,
@@ -24,7 +24,7 @@ const fgauge_cfg_type fgauge_cfg =
         },
         {
             .powermtr_channel = POWERMTR_CFG_CHN_MAINSCHARGER,
-            .type = FUELGG_CHARGING,
+            .type = FGAUGE_CHARGE,
             .endofcharge_cfg = 
             {
                 .voltage_thd_mV = 13500,
@@ -33,7 +33,7 @@ const fgauge_cfg_type fgauge_cfg =
         },
         {
             .powermtr_channel = POWERMTR_CFG_CHN_LOADS,
-            .type = FUELGG_DISCHARGING,
+            .type = FGAUGE_DISCHARGE,
             .endofcharge_cfg = 
             {
                 .voltage_thd_mV = 0, /* Unused. */

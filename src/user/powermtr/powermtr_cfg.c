@@ -1,4 +1,4 @@
-#include "user_powermeter_cfg.h"
+#include "powermtr_cfg.h"
 
 const powermtr_cfg_type powermtr_cfg = 
 {

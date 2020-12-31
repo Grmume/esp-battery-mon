@@ -26,7 +26,7 @@ LOCAL void add_to_history(uint16 voltage_mV, sint32 current_mA);
 LOCAL bool get_from_history(uint16 index, uint16* voltage_mV, sint32* current_mA);
 LOCAL void detect_endofcharge(void);
 
-bool fgauge_init(fuelgg_cfg_type* cfg)
+bool fgauge_init(fgauge_cfg_type* cfg)
 {
     current_cfg = cfg;
 
@@ -45,7 +45,7 @@ void fgauge_main(void)
         if((data->current_mA < current_cfg->ocv_current_thd_mA) &&
            (data->current_mA > -(current_cfg->ocv_current_thd_mA)))
         {
-            const uint16 cntr_detect_thd = (current_cfg->ocv_detect_holdoff_ms) / FUELGG_CFG_CALLCYCLE_MS;
+            const uint16 cntr_detect_thd = (current_cfg->ocv_detect_holdoff_ms) / FGAUGE_CFG_CALLCYCLE_MS;
             
             if(relaxing_cntr > cntr_detect_thd)
             {
@@ -70,7 +70,7 @@ void fgauge_main(void)
         }
 
         /* Coulomb counting. */
-        livedata.coulomb_cnt += (data->current_mA) * FUELGG_CFG_CALLCYCLE_MS;
+        livedata.coulomb_cnt += (data->current_mA) * FGAUGE_CFG_CALLCYCLE_MS;
     }
     else
     {
@@ -90,7 +90,7 @@ LOCAL void add_to_history(uint16 voltage_mV, sint32 current_mA)
     livedata.history.voltage_mV[livedata.history.current_idx] = voltage_mV;
     livedata.history.current_mA[livedata.history.current_idx] = current_mA;
 
-    livedata.history.current_idx = (livedata.history.current_idx + 1) % FUELGG_CFG_HISTORY_SIZE;
+    livedata.history.current_idx = (livedata.history.current_idx + 1) % FGAUGE_CFG_HISTORY_SIZE;
     livedata.history.value_count++;
 }
 
@@ -103,7 +103,7 @@ LOCAL bool get_from_history(uint16 index, uint16* voltage_mV, sint32* current_mA
     }
     else
     {
-        uint8 last_index = (livedata.history.current_idx - 1) % FUELGG_CFG_HISTORY_SIZE;
+        uint8 last_index = (livedata.history.current_idx - 1) % FGAUGE_CFG_HISTORY_SIZE;
         *voltage_mV = livedata.history.voltage_mV[last_index];
         *current_mA = livedata.history.current_mA[last_index];
         return true;
@@ -112,10 +112,10 @@ LOCAL bool get_from_history(uint16 index, uint16* voltage_mV, sint32* current_mA
 
 LOCAL void detect_endofcharge()
 {
-    for(uint8 idx=0;idx<FUELGG_CFG_CURRENT_CHANNEL_COUNT;idx++)
+    for(uint8 idx=0;idx<FGAUGE_CFG_CURRENT_CHANNEL_COUNT;idx++)
     {
-        fuelgg_current_channel_type* chn = &(current_cfg->current_channels[idx]);
-        if(chn->type == FUELGG_CHARGING || chn->type == FUELGG_BIDIRECTIONAL)
+        fgauge_current_channel_type* chn = &(current_cfg->current_channels[idx]);
+        if(chn->type == FGAUGE_CHARGE || chn->type == FGAUGE_BIDIRECTIONAL)
         {
             powermtr_chndata_type* data = powermtr_read_channel(chn->powermtr_channel);
             /* Check if the measured voltage is higher than the end of charge detection threshold. */
